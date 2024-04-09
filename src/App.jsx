@@ -7,7 +7,7 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import {Navbar, Footer, Sidebar, ThemeSettings } from './components'
 import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor, Line} from './pages';
 const App = () => {
-    const activeMenu = false ;
+    const activeMenu = true;
     return (
         <div>
             <BrowserRouter>
@@ -22,13 +22,14 @@ const App = () => {
                         </TooltipComponent>
                     </div>
                     {activeMenu ? (
-                        <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
+                        <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg
+                         bg-white">
                             < Sidebar />
                             </div>
                     ) :
                    (
                     <div className="w-0 dark:bg-secondary-dark-bg">
-                                < Sidebar />
+                        < Sidebar />
 
                         </div>
                    ) }
