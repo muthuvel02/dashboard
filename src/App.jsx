@@ -24,9 +24,9 @@ const App = () => {
                             </button>
                         </TooltipComponent>
                     </div>
-                    {activeMenu ? (
+                    {activeMenu ? ( //  if it true will display in the desktop view
                         <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg
-                         bg-white">
+                         bg-white"> 
                             < Sidebar />
                             </div>
                     ) :
@@ -40,7 +40,8 @@ const App = () => {
                    <div className="fixed md:static bg-main-bg dark-bg navbar w-full">
                     <Navbar />
                    </div>
-                   <Routes>
+                   <div>
+                   <Routes >
                     {/* Dashboard */}
                     <Route path="/" element={ <Ecommerce /> }/>
                     <Route path="/ecommerce" element={ <Ecommerce /> }/>
@@ -66,6 +67,7 @@ const App = () => {
                     <Route path="/pyramid" element={ <Pyramid /> }/>
                     <Route path="/stacked" element={ <Stacked /> }/>
                    </Routes>
+                   </div>
                    </div>
                 </div>
             </BrowserRouter>
