@@ -4,22 +4,23 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
-import {Navbar, Footer, Sidebar, ThemeSettings } from './components'
-import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Area, Bar, Pie, Financial, ColorPicker, ColorMapping, Editor, Line} from './pages';
+import {Navbar, Sidebar, ThemeSettings } from './components'
+import { Ecommerce, Orders, Calendar, Employees, Stacked, Pyramid, Customers, Kanban, Area, Bar, Pie, Financial, ColorMapping, Editor, Line} from './pages';
 import { useStateContext } from "./contexts/ContextProvider";
 
 
 const App = () => {
-    const {activeMenu} = useStateContext();
+    const {activeMenu, themeSettings, setThemeSettings, currentColor, currentMode} = useStateContext();
     return (
-        <div>
+        <div className ={currentMode === 'Dark' ? 'dark' : ''}>
             <BrowserRouter>
                 <div className="flex relative dark:bg-main-dark-bg">
                     <div className="fixed right-4 bottom-4" style={{ zIndex: 1000 }}>
                         <TooltipComponent content="Settings" position='Top'>
                             <button type="button"
+                                onClick={() => setThemeSettings(true)}
                                 className="text-3xl p-3 hover:drop-shadow-xl hover:bg-light-gray text-white"
-                                style={{background:'black', borderRadius: '50%'}}>
+                                style={{background:currentColor, borderRadius: '50%'}}>
                                 <FiSettings />
                             </button>
                         </TooltipComponent>
@@ -36,26 +37,28 @@ const App = () => {
 
                         </div>
                    ) }
-                   <div className={`dark:bg-main-bg min-n-screen w-full ${activeMenu ? 'md:ml-72': 'flex:2'}`}>
+                   <div className={`dark:bg-main-dark-bg min-h-screen w-full ${activeMenu ? 'md:ml-72': 'flex:2'}`}>
                    <div className="fixed md:static bg-main-bg dark-bg navbar w-full">
                     <Navbar />
                    </div>
                    <div>
+                { themeSettings && <ThemeSettings />}
                    <Routes >
                     {/* Dashboard */}
                     <Route path="/" element={ <Ecommerce /> }/>
                     <Route path="/ecommerce" element={ <Ecommerce /> }/>
 
                     {/* Pages */}
-                    <Route path="/order" element={ <Orders /> }/>
+                    <Route path="/orders" element={ <Orders /> }/>
                     <Route path="/editor" element={ <Editor /> }/>
                     <Route path="/customers" element={ <Customers /> }/>
+                    <Route path="/employees" element={<Employees />} />
+
 
                     {/* Apps */}
                     <Route path="/kanban" element={ <Kanban /> }/>
                     <Route path="/editor" element={ <Editor /> }/>
                     <Route path="/calendar" element={ <Calendar /> }/>
-                    <Route path="/color-picker" element={ <ColorPicker /> }/>
 
                     {/* Chart */}
                     <Route path="/line" element={ <Line/> }/>
@@ -63,7 +66,7 @@ const App = () => {
                     <Route path="/bar" element={ <Bar /> }/>
                     <Route path="/pie" element={ <Pie /> }/>
                     <Route path="/financial" element={ <Financial /> }/>
-                    <Route path="/ColorMapping"  element= {<ColorMapping /> }/>
+                    <Route path="/color-mapping"  element= {<ColorMapping /> }/>
                     <Route path="/pyramid" element={ <Pyramid /> }/>
                     <Route path="/stacked" element={ <Stacked /> }/>
                    </Routes>
